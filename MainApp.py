@@ -16,14 +16,14 @@ class MainApp(QtWidgets.QWidget):
 
     def init_ui(self):
         self.setWindowTitle("РобоЯдро")
-        self.setWindowIcon(QtGui.QIcon("logo.svg"))
+        self.setWindowIcon(QtGui.QIcon("media/images/logo.svg"))
         self.resize(800, 400)
         layout = QtWidgets.QHBoxLayout()
 
         # Создаем три карточки
-        card1 = self.create_card("Менеджер Сервоприводов", textManagerServo, "media/controller.png", self.launch_controller_manager)
-        card2 = self.create_card("РобоПаук", textRoboSpider, "media/pauk.png", self.launch_program_two)
-        card3 = self.create_card("Умный Дом", textHaus, "media/smarthouse.png", self.launch_program_three)
+        card1 = self.create_card("Менеджер Сервоприводов", textManagerServo, "media/images/servo.png", self.launch_controller_manager)
+        card2 = self.create_card("РобоПаук", textRoboSpider, "media/images/pauk.png", self.launch_program_two)
+        card3 = self.create_card("Умный Дом", textHaus, "media/images/smarthouse.png", self.launch_program_three)
 
         # Выравниваем карточки по центру
         layout.addWidget(card1)

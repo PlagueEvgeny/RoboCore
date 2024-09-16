@@ -71,7 +71,7 @@ class ServoControllerApp(QtWidgets.QWidget):
         self.command_queue = []
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.process_command_queue)
-        self.timer.start(10)  # Периодический таймер с интервалом в 100 м
+        self.timer.start(1)  # Периодический таймер с интервалом в 100 м
 
         self.company_info = ""
         self.program_info = "Программа: Менеджер Сервоприводов \nВерсия: 1.0\n© Разработчик: Василенко Евгений, 2024\n Лицензия:"
@@ -80,7 +80,7 @@ class ServoControllerApp(QtWidgets.QWidget):
 
     def init_ui(self):
         self.setWindowTitle("Менеджер Сервоприводов")
-        self.setWindowIcon(QtGui.QIcon("logo.svg"))
+        self.setWindowIcon(QtGui.QIcon("media/images/logo.svg"))
         self.setGeometry(100, 100, 910, 700)
 
         main_layout = QtWidgets.QVBoxLayout()
@@ -357,13 +357,13 @@ class ServoControllerApp(QtWidgets.QWidget):
             self.update_command_listbox()
 
     def save_all_commands(self):
-        with open("commands.json", "w") as f:
+        with open("media/commands/commands.json", "w") as f:
             json.dump(self.command_list, f)
         self.message_label.setText("Команды сохранены в commands.json")
 
     def load_all_commands(self):
         try:
-            with open("commands.json", "r") as f:
+            with open("media/commands/commands.json", "r") as f:
                 self.command_list = json.load(f)
             self.update_command_listbox()
             self.message_label.setText("Команды загружены из commands.json")
