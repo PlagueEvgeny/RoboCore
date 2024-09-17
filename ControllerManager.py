@@ -74,7 +74,7 @@ class ServoControllerApp(QtWidgets.QWidget):
         self.timer.start(1)  # Периодический таймер с интервалом в 100 м
 
         self.company_info = ""
-        self.program_info = "Программа: Менеджер Сервоприводов \nВерсия: 1.0\n© Разработчик: Василенко Евгений, 2024\n Лицензия:"
+        self.program_info = "Программа: Менеджер Сервоприводов \nВерсия: 1.0\n© Разработчик: Василенко Евгений, 2024\n Лицензия: MIT License"
 
         self.init_ui()
 

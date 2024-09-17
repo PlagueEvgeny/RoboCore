@@ -3,10 +3,10 @@ import sys
 from PyQt5 import QtWidgets, QtGui, QtCore
 import subprocess
 
-
 textManagerServo = "Управляет сервоприводами и сенсорами для роботов и устройств, обеспечивает управление углами и скоростью."
 textRoboSpider = "Управляет роботом-пауком, обеспечивая его передвижение, манипуляции и взаимодействие с окружающей средой."
 textHaus = "Автоматизация и управление системами умного дома, включая освещение, безопасность и климат-контроль."
+
 
 # Главное окно выбора программы
 class MainApp(QtWidgets.QWidget):
@@ -21,7 +21,8 @@ class MainApp(QtWidgets.QWidget):
         layout = QtWidgets.QHBoxLayout()
 
         # Создаем три карточки
-        card1 = self.create_card("Менеджер Сервоприводов", textManagerServo, "media/images/servo.png", self.launch_controller_manager)
+        card1 = self.create_card("Менеджер Сервоприводов", textManagerServo, "media/images/servo.png",
+                                 self.launch_controller_manager)
         card2 = self.create_card("РобоПаук", textRoboSpider, "media/images/pauk.png", self.launch_program_two)
         card3 = self.create_card("Умный Дом", textHaus, "media/images/smarthouse.png", self.launch_program_three)
 
@@ -68,17 +69,17 @@ class MainApp(QtWidgets.QWidget):
         card_widget.setLayout(card_layout)
         return card_widget
 
-    def get_python_executable(self):
-        return sys.executable
-
-    def launch_controller_manager(self):
+    @staticmethod
+    def launch_controller_manager():
         from ControllerManager import ServoControllerApp
         window = ServoControllerApp()
         window.show()
 
+    @staticmethod
     def launch_program_two(self):
         subprocess.Popen(['python', 'program_two.py'])
 
+    @staticmethod
     def launch_program_three(self):
         subprocess.Popen(['python', 'program_three.py'])
 
