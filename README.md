@@ -19,10 +19,10 @@ ServoControllerApp - это приложение на Python с использо
 1. Клонируйте репозиторий:
 
 ``` bash
-git clone https://github.com/yourusername/ServoControllerApp.git
+git clone https://github.com/PlagueEvgeny/RoboCore.git
 ```
 ``` bash
-cd ServoControllerApp
+cd RoboCore
 ```
 2. Установите необходимые зависимости:
 
@@ -33,7 +33,7 @@ pip install -r requirements.txt
 Запустите приложение:
 
 ```bash
-python servo_controller_app.py
+python MainApp.py
 ```
 ## Использование
 - **Подключение к COM-порту:** Выберите доступный COM-порт из выпадающего списка и нажмите "Подключиться".
