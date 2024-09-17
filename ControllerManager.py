@@ -2,6 +2,7 @@ import os
 import json
 import time
 import subprocess
+import platform
 from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtCore import Qt, QTimer
 
@@ -426,8 +427,12 @@ class ServoControllerApp(QtWidgets.QWidget):
             return
 
         try:
-            subprocess.run(["arduino-cli", "core", "install", "arduino:avr"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
-            subprocess.run(["arduino-cli", "lib", "install", "Servo"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+            if platform.system() == "Windows":
+                subprocess.run(["arduino-cli", "core", "install", "arduino:avr"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+                subprocess.run(["arduino-cli", "lib", "install", "Servo"], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+            else:
+                subprocess.run(["arduino-cli", "core", "install", "arduino:avr"], check=True)
+                subprocess.run(["arduino-cli", "lib", "install", "Servo"], check=True)
 
             compile_command = [
                 "arduino-cli",
@@ -435,7 +440,10 @@ class ServoControllerApp(QtWidgets.QWidget):
                 "--fqbn", "arduino:avr:nano:cpu=atmega168",
                 temp_name
             ]
-            subprocess.run(compile_command, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, creationflags=subprocess.CREATE_NO_WINDOW)
+            if platform.system() == "Windows":
+                subprocess.run(compile_command, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, creationflags=subprocess.CREATE_NO_WINDOW)
+            else:
+                subprocess.run(compile_command, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
             upload_command = [
                 "arduino-cli",
@@ -444,7 +452,10 @@ class ServoControllerApp(QtWidgets.QWidget):
                 "--fqbn", "arduino:avr:nano:cpu=atmega168",
                 temp_name
             ]
-            process = subprocess.run(upload_command, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, creationflags=subprocess.CREATE_NO_WINDOW,  timeout=30)
+            if platform.system() == "Windows":
+                process = subprocess.run(upload_command, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, creationflags=subprocess.CREATE_NO_WINDOW,  timeout=30)
+            else:
+                process = subprocess.run(upload_command, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
             if process.returncode == 0:
                 QtWidgets.QMessageBox.information(self, "Успех", "Прошивка успешно загружена!")
